@@ -52,19 +52,21 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+
 static int cmd_help(char *args);
 
 static struct {
   const char *name;
   const char *description;
   int (*handler) (char *);
-} cmd_table [] = {
+} 
+cmd_table [] = {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-
+  {"si [N]","Pause the program after executing N instructions in a single step. When N is not given, it defaults to 1"}
 };
 
 #define NR_CMD ARRLEN(cmd_table)
