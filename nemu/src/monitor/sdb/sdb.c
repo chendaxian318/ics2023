@@ -119,7 +119,9 @@ void sdb_mainloop() {
 
 #ifdef CONFIG_DEVICE
     extern void sdl_clear_event_queue();
+    printf("1\n");
     sdl_clear_event_queue();
+    printf("2\n");
 #endif
 
     int i;
