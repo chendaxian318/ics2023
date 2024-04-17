@@ -62,7 +62,7 @@ static int cmd_si(char *args){
 }
 
 static int cmd_info(char *args){
-  cpu_exec(arg_num);
+  
   return 0;
 }
 
