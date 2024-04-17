@@ -61,6 +61,11 @@ static int cmd_si(char *args){
   return 0;
 }
 
+static int cmd_info(char *args){
+  cpu_exec(arg_num);
+  return 0;
+}
+
 //p1.4 add end
 
 static int cmd_help(char *args);
@@ -76,8 +81,10 @@ static struct {
 
   /* TODO: Add more commands */
   /*si [N]功能*/
-  {"si","Pause the program after executing N instructions in a single step. When N is not given, it defaults to 1",cmd_si}
+  {"si","Pause the program after executing N instructions in a single step. When N is not given, it defaults to 1",cmd_si},
+  {"info","reg_display",cmd_info}
 };
+
 
 #define NR_CMD ARRLEN(cmd_table)
 
@@ -133,12 +140,17 @@ void sdb_mainloop() {
     if(arg_1){
       arg_2=strtok(NULL," ");
     } 
-    if(arg_1&&arg_1[0]>='0'&&arg_1[0]<='9'){
-      for(int i=0;i<strlen(arg_1);i++){
+    //求第二参数
+    if(arg_1){
+      //第二参数为数字
+      if(arg_1[0]>='0'&&arg_1[0]<='9'){
+        for(int i=0;i<strlen(arg_1);i++){
         arg_num=arg_num*10+arg_1[i]-'0';
+        }
       }
     }
     else arg_num=1;
+    //求第三参数
     if(arg_2){
 
     }
