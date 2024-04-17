@@ -128,16 +128,16 @@ void sdb_mainloop() {
     
     //p1.4 get si's num begin
     si_num=0;
-    char *str_num=strtok(NULL," ");
-    if(str_num&&str_num[0]>='0'&&str_num[0]<='9'){
-      for(int i=0;i<strlen(str_num);i++){
-        si_num=si_num*10+str_num[i]-'0';
+    char *arg_1=strtok(NULL," ");
+    if(arg_1&&arg_1[0]>='0'&&arg_1[0]<='9'){
+      for(int i=0;i<strlen(arg_1);i++){
+        si_num=si_num*10+arg_1[i]-'0';
       }
     }
     else si_num=1;
     //p1.4 get si's num end
 
-    
+
     char *args = cmd + strlen(cmd) + 1;
     if (args >= str_end) {
       args = NULL;
