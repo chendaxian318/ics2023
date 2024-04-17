@@ -127,7 +127,6 @@ void sdb_mainloop() {
     
     //p1.4 get si's num
     char *str_num=strtok(NULL," ");
-    printf("%s",str_num);
     if(str_num&&str_num[0]>='0'&&str_num[0]<='9'){
       for(int i=0;i<strlen(str_num);i++){
         si_num=si_num*10+str_num[i]-'0';
