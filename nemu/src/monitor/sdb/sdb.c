@@ -57,10 +57,11 @@ static int cmd_q(char *args) {
 
 //p1.4 add begin
 static int cmd_si(char *args){
-  printf("%d\n",si_num);
   cpu_exec(si_num);
   return 0;
 }
+
+//p1.4 add end
 
 static int cmd_help(char *args);
 
@@ -125,7 +126,7 @@ void sdb_mainloop() {
      * which may need further parsing
      */
     
-    //p1.4 get si's num
+    //p1.4 get si's num begin
     si_num=0;
     char *str_num=strtok(NULL," ");
     if(str_num&&str_num[0]>='0'&&str_num[0]<='9'){
@@ -134,7 +135,9 @@ void sdb_mainloop() {
       }
     }
     else si_num=1;
+    //p1.4 get si's num end
 
+    
     char *args = cmd + strlen(cmd) + 1;
     if (args >= str_end) {
       args = NULL;
