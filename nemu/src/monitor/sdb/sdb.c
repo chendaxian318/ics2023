@@ -64,7 +64,7 @@ static int cmd_si(char *args){
       }
     }
     else si_num=1;
-  cpu_exec(si_num);
+  cpu_exec(1);
   return 0;
 }
 
