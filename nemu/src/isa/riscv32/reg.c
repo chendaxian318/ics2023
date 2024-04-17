@@ -24,8 +24,6 @@ const char *regs[] = {
 };
 
 void isa_reg_display() {
-  bool*z=NULL;
-  *z=true;
   for(int i=0;i<32;i++)
   printf("%s\t\t\t ",reg_name(i));
 }
