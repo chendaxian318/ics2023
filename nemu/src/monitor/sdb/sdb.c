@@ -148,6 +148,9 @@ void sdb_mainloop() {
         arg_num=arg_num*10+arg_1[i]-'0';
         }
       }
+      else if(strcmp(arg_1,"r")==0){
+
+      }
     }
     else arg_num=1;
     //求第三参数
