@@ -27,7 +27,7 @@ void isa_reg_display() {
   bool*z=NULL;
   *z=true;
   for(int i=0;i<32;i++)
-  printf("%s\t\t\t %d\t\t\t \t\t\t\n",regs[i],isa_reg_str2val(regs[i],z));
+  printf("%d\t\t\t \t\t\t \t\t\t\n",gpr(i));
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
