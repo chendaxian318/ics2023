@@ -52,6 +52,10 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+static int cmd_si(char *args){
+  cpu_exec(1);
+  return 0;
+}
 
 static int cmd_help(char *args);
 
@@ -59,14 +63,14 @@ static struct {
   const char *name;
   const char *description;
   int (*handler) (char *);
-} 
-cmd_table [] = {
+} cmd_table [] = {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-  {"si [N]","Pause the program after executing N instructions in a single step. When N is not given, it defaults to 1"}
+  /*si [N]功能*/
+  {"si","Pause the program after executing N instructions in a single step. When N is not given, it defaults to 1",cmd_si}
 };
 
 #define NR_CMD ARRLEN(cmd_table)
@@ -114,6 +118,17 @@ void sdb_mainloop() {
     /* treat the remaining string as the arguments,
      * which may need further parsing
      */
+    
+    
+
+    /*
+    //get si num 
+    char *str_num=strtok(NULL," ");
+    for(int i=0;i<strlen(str_num);i++){
+      si_num=si_num*10+str_num[i]-'0';
+    }
+    */
+
     char *args = cmd + strlen(cmd) + 1;
     if (args >= str_end) {
       args = NULL;
