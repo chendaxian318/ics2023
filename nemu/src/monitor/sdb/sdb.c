@@ -21,8 +21,7 @@
 
 static int is_batch_mode = false;
 
-//pa1.4 add
-static int si_num=0;
+
 
 void init_regex();
 void init_wp_pool();
@@ -56,8 +55,9 @@ static int cmd_q(char *args) {
 }
 
 //p1.4 add begin
+static int arg_num=0;
 static int cmd_si(char *args){
-  cpu_exec(si_num);
+  cpu_exec(arg_num);
   return 0;
 }
 
@@ -127,14 +127,21 @@ void sdb_mainloop() {
      */
     
     //p1.4 get si's num begin
-    si_num=0;
+    arg_num=0;
     char *arg_1=strtok(NULL," ");
+    char *arg_2=NULL;
+    if(arg_1){
+      arg_2=strtok(NULL," ");
+    } 
     if(arg_1&&arg_1[0]>='0'&&arg_1[0]<='9'){
       for(int i=0;i<strlen(arg_1);i++){
-        si_num=si_num*10+arg_1[i]-'0';
+        arg_num=arg_num*10+arg_1[i]-'0';
       }
     }
-    else si_num=1;
+    else arg_num=1;
+    if(arg_2){
+
+    }
     //p1.4 get si's num end
 
 
