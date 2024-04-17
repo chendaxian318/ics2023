@@ -21,8 +21,6 @@
 
 static int is_batch_mode = false;
 
-//pa1.4 add si_num
-static int si_num;
 
 void init_regex();
 void init_wp_pool();
@@ -55,7 +53,17 @@ static int cmd_q(char *args) {
   return -1;
 }
 
+//p1.4 add begin
 static int cmd_si(char *args){
+     //get si num 
+    int si_num=0;
+    char *str_num=strtok(NULL," ");
+    if(str_num[0]>='0'&&str_num[0]<='9'){
+      for(int i=0;i<strlen(str_num);i++){
+        si_num=si_num*10+str_num[i]-'0';
+      }
+    }
+    else si_num=1;
   cpu_exec(si_num);
   return 0;
 }
@@ -122,16 +130,6 @@ void sdb_mainloop() {
     /* treat the remaining string as the arguments,
      * which may need further parsing
      */
-    
-    
-
-    
-    //get si num 
-    si_num=1;
-    char *str_num=strtok(NULL," ");
-    for(int i=0;i<strlen(str_num);i++){
-      si_num=si_num*10+str_num[i]-'0';
-    }
     
 
     char *args = cmd + strlen(cmd) + 1;
