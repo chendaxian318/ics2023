@@ -57,7 +57,7 @@ static int cmd_q(char *args) {
 
 //p1.4 add begin
 static int cmd_si(char *args){
-  printf("%d",si_num);
+  printf("%d\n",si_num);
   cpu_exec(si_num);
   return 0;
 }
