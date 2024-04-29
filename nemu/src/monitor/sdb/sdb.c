@@ -78,7 +78,7 @@ static int cmd_info(char *args){
 static int cmd_x(char *args){
   int len,pos;
   sscanf(args,"%d %x",&len,&pos);
-  for(int i=0;i<len;i++,pos+=16){
+  for(int i=0;i<len;i++,pos+=4){
     printf("mem=%x \t\t\t value=%d\n",pos,vaddr_read(pos,4));
   
   }
