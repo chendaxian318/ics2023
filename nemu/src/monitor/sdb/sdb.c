@@ -76,6 +76,7 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
+  if(!args) return 0;
   int len,pos;
   sscanf(args,"%d %x",&len,&pos);
   for(int i=0;i<len;i++,pos+=4){
