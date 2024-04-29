@@ -55,10 +55,13 @@ static int cmd_q(char *args) {
 }
 
 //p1.4 add begin
-static int arg1_num=0;
-unsigned int arg2_num=0;
+
 static int cmd_si(char *args){
-  cpu_exec(arg1_num);
+  int n=0;
+  if(args){
+    sscanf(args,"%d",&n);
+  }
+  cpu_exec(n);
   return 0;
 }
 
@@ -68,10 +71,7 @@ static int cmd_info(char *args){
 }
 
 static int cmd_x(char *args){
-  // int *pos=(int *)arg2_num;
-  // for(int i=0;i<arg1_num;pos++){
-  //   //printf("mem=%x value=%d\n",pos+16*i,*pos);
-  // }
+  
   return 0;
 }
 //p1.4 add end
@@ -142,36 +142,6 @@ void sdb_mainloop() {
      * which may need further parsing
      */
     
-    //p1.4 get si's num begin
-    arg1_num=0;
-    char *arg_1=strtok(NULL," ");
-    char *arg_2=strtok(NULL," ");
-    if(arg_1){
-      arg_2=strtok(NULL," ");
-    } 
-    //求第二参数
-    if(arg_1){
-      //第二参数为数字
-      if(arg_1[0]>='0'&&arg_1[0]<='9'){
-        for(int i=0;i<strlen(arg_1);i++){
-        arg1_num=arg1_num*10+arg_1[i]-'0';
-        }
-      }
-      //info r
-      else if(strcmp(arg_1,"r")==0){
-
-      }
-    }
-    else arg1_num=1;
-    //求第三参数
-    if(arg_2){
-      //第二参数为数字
-      if(arg_2[0]=='0'&&arg_2[0]<='x'){
-        sscanf(arg_2,"%x",&arg2_num);
-      }
-      
-    }
-    //p1.4 get si's num end
 
 
     char *args = cmd + strlen(cmd) + 1;
