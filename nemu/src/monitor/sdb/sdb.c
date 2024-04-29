@@ -76,7 +76,7 @@ static int cmd_info(char *args){
 
 static int cmd_x(char *args){
   int len,pos;
-  sscanf(args,"%d %d",&len,&pos);
+  sscanf(args,"%d %x",&len,&pos);
   for(int i=0;i<len;i++,pos+=16){
     printf("mem=%x ",pos);
   }
