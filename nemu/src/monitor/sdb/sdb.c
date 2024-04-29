@@ -18,6 +18,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include <memory/vaddr.h>
 
 static int is_batch_mode = false;
 
@@ -78,7 +79,8 @@ static int cmd_x(char *args){
   int len,pos;
   sscanf(args,"%d %x",&len,&pos);
   for(int i=0;i<len;i++,pos+=16){
-    printf("mem=%x ",pos);
+    printf("mem=%x \t\t\t value=%d\n",pos,vaddr_read(pos,4));
+  
   }
   return 0;
 }
