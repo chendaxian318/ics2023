@@ -55,9 +55,10 @@ static int cmd_q(char *args) {
 }
 
 //p1.4 add begin
-static int arg_num=0;
+static int arg1_num=0;
+unsigned int arg2_num=0;
 static int cmd_si(char *args){
-  cpu_exec(arg_num);
+  cpu_exec(arg1_num);
   return 0;
 }
 
@@ -66,6 +67,13 @@ static int cmd_info(char *args){
   return 0;
 }
 
+static int cmd_x(char *args){
+  // int *pos=(int *)arg2_num;
+  // for(int i=0;i<arg1_num;pos++){
+  //   //printf("mem=%x value=%d\n",pos+16*i,*pos);
+  // }
+  return 0;
+}
 //p1.4 add end
 
 static int cmd_help(char *args);
@@ -82,7 +90,8 @@ static struct {
   /* TODO: Add more commands */
   /*si [N]功能*/
   {"si","Pause the program after executing N instructions in a single step. When N is not given, it defaults to 1",cmd_si},
-  {"info","reg_display",cmd_info}
+  {"info","reg_display",cmd_info},
+  {"x","printf memory",cmd_x}
 };
 
 
@@ -134,9 +143,9 @@ void sdb_mainloop() {
      */
     
     //p1.4 get si's num begin
-    arg_num=0;
+    arg1_num=0;
     char *arg_1=strtok(NULL," ");
-    char *arg_2=NULL;
+    char *arg_2=strtok(NULL," ");
     if(arg_1){
       arg_2=strtok(NULL," ");
     } 
@@ -145,17 +154,22 @@ void sdb_mainloop() {
       //第二参数为数字
       if(arg_1[0]>='0'&&arg_1[0]<='9'){
         for(int i=0;i<strlen(arg_1);i++){
-        arg_num=arg_num*10+arg_1[i]-'0';
+        arg1_num=arg1_num*10+arg_1[i]-'0';
         }
       }
+      //info r
       else if(strcmp(arg_1,"r")==0){
 
       }
     }
-    else arg_num=1;
+    else arg1_num=1;
     //求第三参数
     if(arg_2){
-
+      //第二参数为数字
+      if(arg_2[0]=='0'&&arg_2[0]<='x'){
+        sscanf(arg_2,"%x",&arg2_num);
+      }
+      
     }
     //p1.4 get si's num end
 
