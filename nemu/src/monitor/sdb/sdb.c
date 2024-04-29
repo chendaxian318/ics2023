@@ -57,7 +57,7 @@ static int cmd_q(char *args) {
 //p1.4 add begin
 
 static int cmd_si(char *args){
-  int n=0;
+  int n=1;
   if(args){
     sscanf(args,"%d",&n);
   }
