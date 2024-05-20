@@ -21,7 +21,7 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,
+  TK_NOTYPE = 1, TK_EQ,
   
   /* TODO: Add more token types */
   TK_MUL,TK_DIV,
