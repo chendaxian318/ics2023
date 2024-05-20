@@ -37,7 +37,7 @@ static struct rule {
    * Pay attention to the precedence level of different rules.
    */
   //{"*",TK_MUL},         //multiply
-  //{"/",TK_DIV},         //divide
+  {"/",TK_DIV},         //divide
   {" +", TK_NOTYPE},    // spaces
   {"\\+", TK_PLUS},         // plus
   {"-",TK_SUB},            //subtraction
