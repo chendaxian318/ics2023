@@ -36,11 +36,11 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  {"*",TK_MUL},         //multiply
-  {"/",TK_DIV},         //divide
+  //{"*",TK_MUL},         //multiply
+  //{"/",TK_DIV},         //divide
   {" +", TK_NOTYPE},    // spaces
   {"\\+", TK_PLUS},         // plus
-  {"-",TK_SUB},            //subtraction
+  //{"-",TK_SUB},            //subtraction
   {"==", TK_EQ},        // equal
 };
 
@@ -98,14 +98,14 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
-          case '+' :
-          //break;
-          case '-':
-          //break;
-          case '*':
-          //break;
-          case '/':
-          //break;
+          // case '+' :
+          // //break;
+          // case '-':
+          // //break;
+          // case '*':
+          // //break;
+          // case '/':
+          // //break;
           default: TODO();
         }
 
