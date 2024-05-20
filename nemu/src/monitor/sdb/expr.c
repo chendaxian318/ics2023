@@ -41,7 +41,7 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-  //{"^[0-9]*",TK_NUM},     //number
+  {"^[0-9]*",TK_NUM},     //number
   {"\\*",TK_MUL},         //multiply
   {"/",TK_DIV},         //divide
   {" +", TK_NOTYPE},    // spaces
