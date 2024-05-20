@@ -99,13 +99,13 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
           case '+' :
-          break;
+          //break;
           case '-':
-          break;
+          //break;
           case '*':
-          break;
+          //break;
           case '/':
-          break;
+          //break;
           default: TODO();
         }
 
