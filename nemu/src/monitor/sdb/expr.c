@@ -107,13 +107,19 @@ static bool make_token(char *e) {
          */
         tokens[i].type=rules[i].token_type;
         switch (rules[i].token_type) {
-          case TK_PLUS:
-          break;
-          case TK_SUB:
+          case TK_NUM:
           break;
           case TK_MUL:
           break;
           case TK_DIV:
+          break;
+          case TK_PLUS:
+          break;
+          case TK_SUB:
+          break;
+          case TK_L_BRACkET:
+          break;
+          case TK_R_BRACkET:
           break;
           default: TODO();
         }
