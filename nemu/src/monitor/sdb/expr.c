@@ -48,8 +48,8 @@ static struct rule {
   {"\\+", TK_PLUS},         // plus
   {"-",TK_SUB},            //subtraction
   {"==", TK_EQ},        // equal
-  {"(",TK_L_BRACkET},  
-  //{")",TK_R_BRACkET},
+  //{"(",TK_L_BRACkET},  
+  {")",TK_R_BRACkET},
   
 };
 
