@@ -44,7 +44,7 @@ static struct rule {
   {"^[0-9]*",TK_NUM},     //number
   {"\\*",TK_MUL},         //multiply
   {"/",TK_DIV},         //divide
-  {" +", TK_NOTYPE},    // spaces
+  {" ", TK_NOTYPE},    // spaces
   {"\\+", TK_PLUS},         // plus
   {"-",TK_SUB},            //subtraction
   {"==", TK_EQ},        // equal
@@ -105,7 +105,7 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
-
+        tokens[i].type=rules[i].token_type;
         switch (rules[i].token_type) {
           case TK_PLUS:
           break;
