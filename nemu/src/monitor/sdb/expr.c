@@ -117,18 +117,18 @@ static bool make_token(char *e) {
           case TK_NUM:
             memcpy(tokens[i].str,rules[i].regex,strlen(rules[i].regex)+1);
           break;
-          case TK_MUL:
-          break;
-          case TK_DIV:
-          break;
-          case TK_PLUS:
-          break;
-          case TK_SUB:
-          break;
-          case TK_L_BRACKET:
-          break;
-          case TK_R_BRACKET:
-          break;
+          // case TK_MUL:
+          // break;
+          // case TK_DIV:
+          // break;
+          // case TK_PLUS:
+          // break;
+          // case TK_SUB:
+          // break;
+          // case TK_L_BRACKET:
+          // break;
+          // case TK_R_BRACKET:
+          // break;
           /*ADD end*/
           default: TODO();
         }
@@ -261,3 +261,4 @@ int check_parentheses(int p, int q){
   return 0;
   
 }
+/*ADD end*/
