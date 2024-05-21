@@ -87,6 +87,7 @@ static bool make_token(char *e) {
   int i;
   regmatch_t pmatch;
 
+//token数组长度
   nr_token = 0;
 
   while (e[position] != '\0') {
@@ -108,7 +109,7 @@ static bool make_token(char *e) {
         tokens[i].type=rules[i].token_type;
         switch (rules[i].token_type) {
           case TK_NUM:
-            memcpy(tokens[i].str,rules[i].regex,strlen(rules[i].regex));
+            memcpy(tokens[i].str,rules[i].regex,strlen(rules[i].regex)+1);
           break;
           case TK_MUL:
           break;
@@ -148,5 +149,7 @@ word_t expr(char *e, bool *success) {
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
 
+
   return 0;
 }
+
