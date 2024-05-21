@@ -22,7 +22,7 @@
 
 /*ADD begin*/
 int eval(int p,int q);
-bool check_parentheses(int p, int q);
+int check_parentheses(int p, int q);
 /*ADD end*/
 
 enum {
@@ -111,6 +111,7 @@ static bool make_token(char *e) {
          * to record the token in the array `tokens'. For certain types
          * of tokens, some extra actions should be performed.
          */
+         /*ADD begin*/
         tokens[i].type=rules[i].token_type;
         switch (rules[i].token_type) {
           case TK_NUM:
@@ -128,6 +129,7 @@ static bool make_token(char *e) {
           break;
           case TK_R_BRACKET:
           break;
+          /*ADD end*/
           default: TODO();
         }
 
@@ -162,6 +164,7 @@ word_t expr(char *e, bool *success) {
 int eval(int p,int q){
   if (p > q) {
     /* Bad expression */
+    return 0;
   }
   else if (p == q) {
     /* Single token.
@@ -169,7 +172,8 @@ int eval(int p,int q){
      * Return the value of the number.
      */
   }
-  else if (check_parentheses(p, q) == true) {
+  /*check_parentheses(p, q):1 匹配成功 0匹配不成功，但是是个正确的括号序列，-1，是不正确的括号序列*/
+  else if (check_parentheses(p, q) == 1) {
     /* The expression is surrounded by a matched pair of parentheses.
      * If that is the case, just throw away the parentheses.
      */
@@ -180,17 +184,27 @@ int eval(int p,int q){
   }
   return 0;
 }
-bool check_parentheses(int p, int q){
+int check_parentheses(int p, int q){
   int cnt=0;
+  //检测是否是个正常的括号序列
+  for(int i=p;i<=q;i++){
+      if(tokens[i].type==TK_L_BRACKET) cnt++;
+      else if(tokens[i].type==TK_R_BRACKET){
+        if(cnt==0) return -1;
+        else cnt--;
+      }
+  }
   if(tokens[p].type==TK_L_BRACKET&&tokens[p].type==TK_R_BRACKET){
     for(int i=p+1;i<q;i++){
       if(tokens[i].type==TK_L_BRACKET) cnt++;
       else if(tokens[i].type==TK_R_BRACKET){
-        if(cnt==0) return false;
+        if(cnt==0) return 0;
         else cnt--;
       }
     }
   }
-  if(cnt==0) return true;
-    else return false;
+  else return 0;
+  if(cnt==0) return 1;
+  return 0;
+  
 }
