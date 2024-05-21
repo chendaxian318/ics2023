@@ -20,6 +20,11 @@
  */
 #include <regex.h>
 
+/*ADD begin*/
+int eval(int p,int q);
+bool check_parentheses(int p, int q);
+/*ADD end*/
+
 enum {
   TK_NOTYPE = 256, TK_EQ,
   
@@ -29,8 +34,8 @@ enum {
   TK_DIV,
   TK_PLUS,
   TK_SUB,
-  TK_L_BRACkET,
-  TK_R_BRACkET,
+  TK_L_BRACKET,
+  TK_R_BRACKET,
 };
 
 static struct rule {
@@ -48,8 +53,8 @@ static struct rule {
   {"\\+", TK_PLUS},         // plus
   {"-",TK_SUB},            //subtraction
   {"==", TK_EQ},        // equal
-  {"\\(",TK_L_BRACkET},  
-  {")",TK_R_BRACkET},
+  {"\\(",TK_L_BRACKET},  
+  {")",TK_R_BRACKET},
   
 };
 
@@ -119,9 +124,9 @@ static bool make_token(char *e) {
           break;
           case TK_SUB:
           break;
-          case TK_L_BRACkET:
+          case TK_L_BRACKET:
           break;
-          case TK_R_BRACkET:
+          case TK_R_BRACKET:
           break;
           default: TODO();
         }
@@ -134,6 +139,7 @@ static bool make_token(char *e) {
       printf("no match at position %d\n%s\n%*.s^\n", position, e, position, "");
       return false;
     }
+    nr_token++;
   }
 
   return true;
@@ -152,4 +158,39 @@ word_t expr(char *e, bool *success) {
 
   return 0;
 }
-
+/*ADD begin*/
+int eval(int p,int q){
+  if (p > q) {
+    /* Bad expression */
+  }
+  else if (p == q) {
+    /* Single token.
+     * For now this token should be a number.
+     * Return the value of the number.
+     */
+  }
+  else if (check_parentheses(p, q) == true) {
+    /* The expression is surrounded by a matched pair of parentheses.
+     * If that is the case, just throw away the parentheses.
+     */
+    return eval(p + 1, q - 1);
+  }
+  else {
+    /* We should do more things here. */
+  }
+  return 0;
+}
+bool check_parentheses(int p, int q){
+  int cnt=0;
+  if(tokens[p].type==TK_L_BRACKET&&tokens[p].type==TK_R_BRACKET){
+    for(int i=p+1;i<q;i++){
+      if(tokens[i].type==TK_L_BRACKET) cnt++;
+      else if(tokens[i].type==TK_R_BRACKET){
+        if(cnt==0) return false;
+        else cnt--;
+      }
+    }
+  }
+  if(cnt==0) return true;
+    else return false;
+}
