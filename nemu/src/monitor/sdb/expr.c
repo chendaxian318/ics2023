@@ -108,6 +108,7 @@ static bool make_token(char *e) {
         tokens[i].type=rules[i].token_type;
         switch (rules[i].token_type) {
           case TK_NUM:
+            memcpy(tokens[i].str,rules[i].regex,strlen(rules[i].regex));
           break;
           case TK_MUL:
           break;
