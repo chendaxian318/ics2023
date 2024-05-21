@@ -171,6 +171,15 @@ int eval(int p,int q){
      * For now this token should be a number.
      * Return the value of the number.
      */
+     if(tokens[p].type==TK_NUM){
+      int n=strlen(tokens[p].str);
+      int temp=0;
+      for(int i=0;i<n;i++){
+        temp=temp*10+tokens[p].str[i]-'0';
+      }
+      return temp;
+     }
+    return 0;
   }
   /*check_parentheses(p, q):1 匹配成功 0匹配不成功，但是是个正确的括号序列，-1，是不正确的括号序列*/
   else if (check_parentheses(p, q) == 1) {
@@ -181,6 +190,50 @@ int eval(int p,int q){
   }
   else {
     /* We should do more things here. */
+    char op='\0';
+    int pos=0,l_cnt=0,r_cnt=0;;
+    for(int i=p;i<=q;i++){
+      if(tokens[i].type==TK_L_BRACKET){
+        l_cnt++;
+      }
+      else if(tokens[i].type==TK_R_BRACKET){
+        r_cnt++;
+      }
+      //还在括号里，不需要扫描tokens
+      else if(l_cnt<r_cnt) continue;
+      else if(tokens[i].type==TK_PLUS){
+        op='+';
+        pos=i;
+      }
+      else if(tokens[i].type==TK_MUL){
+        if(op=='\0'||op=='*'||op=='/'){
+          op='*';
+          pos=i;
+        }
+      }
+      else if(tokens[i].type==TK_SUB){
+        op='-';
+        pos=i;
+      }
+      else if(tokens[i].type==TK_DIV){
+        if(op=='\0'||op=='*'||op=='/'){
+          op='/';
+          pos=i;
+        }
+      }
+    }
+    if(op=='+'){
+      return eval(p,pos-1)+eval(pos+1,q);
+    }
+    else if(op=='-'){
+      return eval(p,pos-1)-eval(pos+1,q);
+    }
+    else if(op=='*'){
+      return eval(p,pos-1)*eval(pos+1,q);
+    }
+    else if(op=='/'){
+      return eval(p,pos-1)/eval(pos+1,q);
+    }
   }
   return 0;
 }
