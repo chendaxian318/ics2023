@@ -20,7 +20,9 @@ void init_monitor(int, char *[]);
 void am_init_monitor();
 void engine_start();
 int is_exit_status_bad();
-
+/*ADD begin*/
+void check_expr();
+/*ADD end*/
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
 #ifdef CONFIG_TARGET_AM
@@ -30,21 +32,32 @@ int main(int argc, char *argv[]) {
 #endif
 
   /* Start engine. */
-  /*ADD begin*/
+  
+  engine_start();
+
+  return 0;
+}
+
+/*ADD begin*/
+void check_expr(){
+  
   FILE *file;
   char line[1024];  //假设每行不超过1024个字符，加上一个'\0'字符作为结束符
   file=fopen("/home/chenxin/ics2023/nemu/tools/gen-expr/input","r");
   if(file==NULL){
     perror("Error opening file");
-    return 1;
+    return ;
   }
   // 读取文件的每一行，直到EOF（文件末尾）  
     while (fgets(line, sizeof(line), file) != NULL) {  
         // 输出读取到的行  
-        printf("%s", line);  
-    }  
-  /*ADD end*/
-  engine_start();
-
-  return 0;
+        printf("%s", line);
+        char *result,*expr;
+        char *space_str=strchr(line,' ');
+        *space_str='\0';
+        result=line;
+        expr=space_str+1;
+        printf("result=%s expr=%s",result,expr);
+    }
 }
+/*ADD end*/
