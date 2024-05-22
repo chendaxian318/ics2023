@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 #endif
 
   /* Start engine. */
-  
+  check_expr();
   engine_start();
 
   return 0;
