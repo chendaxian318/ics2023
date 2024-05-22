@@ -19,7 +19,12 @@
 #include <time.h>
 #include <assert.h>
 #include <string.h>
-
+/*ADD begin*/
+static void gen_num();
+static void gen_rand_op();
+static void gen(char);
+static int choose(int);
+/*ADD end*/
 // this should be enough
 static char buf[65536] = {};
 static char code_buf[65536 + 128] = {}; // a little larger than `buf`
@@ -30,9 +35,8 @@ static char *code_format =
 "  printf(\"%%u\", result); "
 "  return 0; "
 "}";
-
 static void gen_rand_expr() {
-  buf[0] = '\0';
+  
   /*ADD begin*/
   switch (choose(3)) {
     case 0: gen_num(); break;
@@ -41,19 +45,31 @@ static void gen_rand_expr() {
   }
 }
 void gen_num(){
-   char s[]=itoa(rand()%100);
+   int temp=choose(100);
+   while(buf[strlen(buf)-1]=='/'&&temp==0){
+    temp=choose(100);
+   }
+   char s[65536];
+   sprintf(s,"%d",temp);
    strcpy(buf+strlen(buf),s);
 }
-void gen_rand_expr(){
+void gen_rand_op(){
+  int len=strlen(buf);
   switch(choose(4)){
-    case 0: buf[strlen(buf)]='+'; break;
-    case 1: buf[strlen(buf)]='-'; break;
-    case 2: buf[strlen(buf)]='*'; break;
-    case 3: buf[strlen(buf)]='/'; break;
+    case 0: buf[len]='+'; break;
+    case 1: buf[len]='-'; break;
+    case 2: buf[len]='*'; break;
+    default : buf[len]='/'; break;
   }
+  buf[len+1]='\0';
 }
-static void gen(char ch){
-  buf[strlen(buf)]=ch;
+void gen(char ch){
+  int len=strlen(buf);
+  buf[len]=ch;
+  buf[len+1]='\0';
+}
+int choose(int x){
+  return rand()%x;
 }
 
 
@@ -68,10 +84,10 @@ int main(int argc, char *argv[]) {
   }
   int i;
   for (i = 0; i < loop; i ++) {
+    memset(buf,0,sizeof(buf));
     gen_rand_expr();
-
+    
     sprintf(code_buf, code_format, buf);
-
     FILE *fp = fopen("/tmp/.code.c", "w");
     assert(fp != NULL);
     fputs(code_buf, fp);
