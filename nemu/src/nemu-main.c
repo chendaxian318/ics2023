@@ -31,18 +31,18 @@ int main(int argc, char *argv[]) {
 
   /* Start engine. */
   /*ADD begin*/
-  FILE *file;
-  char line[1024];  //假设每行不超过1024个字符，加上一个'\0'字符作为结束符
-  file=fopen("../tools/gen-expr/input","r");
-  if(file==NULL){
-    perror("Error opening file");
-    return 1;
-  }
-  // 读取文件的每一行，直到EOF（文件末尾）  
-    while (fgets(line, sizeof(line), file) != NULL) {  
-        // 输出读取到的行  
-        printf("%s", line);  
-    }  
+  // FILE *file;
+  // char line[1024];  //假设每行不超过1024个字符，加上一个'\0'字符作为结束符
+  // file=fopen("../tools/gen-expr/input","r");
+  // if(file==NULL){
+  //   perror("Error opening file");
+  //   return 1;
+  // }
+  // // 读取文件的每一行，直到EOF（文件末尾）  
+  //   while (fgets(line, sizeof(line), file) != NULL) {  
+  //       // 输出读取到的行  
+  //       printf("%s", line);  
+  //   }  
   /*ADD end*/
   engine_start();
 
