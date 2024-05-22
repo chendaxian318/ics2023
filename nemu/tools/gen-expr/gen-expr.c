@@ -31,13 +31,33 @@ static char *code_format =
 "  return 0; "
 "}";
 
-void gen_rand_expr() {
+static void gen_rand_expr() {
+  buf[0] = '\0';
+  /*ADD begin*/
   switch (choose(3)) {
     case 0: gen_num(); break;
     case 1: gen('('); gen_rand_expr(); gen(')'); break;
     default: gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;
   }
 }
+void gen_num(){
+   char s[]=itoa(rand()%100);
+   strcpy(buf+strlen(buf),s);
+}
+void gen_rand_expr(){
+  switch(choose(4)){
+    case 0: buf[strlen(buf)]='+'; break;
+    case 1: buf[strlen(buf)]='-'; break;
+    case 2: buf[strlen(buf)]='*'; break;
+    case 3: buf[strlen(buf)]='/'; break;
+  }
+}
+static void gen(char ch){
+  buf[strlen(buf)]=ch;
+}
+
+
+
 
 int main(int argc, char *argv[]) {
   int seed = time(0);
