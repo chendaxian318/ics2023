@@ -21,6 +21,7 @@ void am_init_monitor();
 void engine_start();
 int is_exit_status_bad();
 /*ADD begin*/
+word_t expr(char *e, bool *success);
 void check_expr();
 /*ADD end*/
 int main(int argc, char *argv[]) {
@@ -52,12 +53,14 @@ void check_expr(){
     while (fgets(line, sizeof(line), file) != NULL) {  
         // 输出读取到的行  
         printf("%s", line);
-        char *result,*expr;
+        char *result,*m_expr;
         char *space_str=strchr(line,' ');
         *space_str='\0';
         result=line;
-        expr=space_str+1;
-        printf("result=%s expr=%s",result,expr);
+        m_expr=space_str+1;
+        printf("result=%s expr=%s",result,m_expr);
+        bool st;
+        expr(m_expr,&st);
     }
 }
 /*ADD end*/
