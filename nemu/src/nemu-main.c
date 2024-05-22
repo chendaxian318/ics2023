@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
   /*ADD begin*/
   FILE *file;
   char line[1024];  //假设每行不超过1024个字符，加上一个'\0'字符作为结束符
-  file=fopen("/tools/gen-expr/input","r");
+  file=fopen("~/ics2023/nemu/tools/gen-expr/input","r");
   if(file==NULL){
     perror("Error opening file");
     return 1;
