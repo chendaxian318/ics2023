@@ -26,7 +26,7 @@ void check_expr();
 /*ADD end*/
 int main(int argc, char *argv[]) {
   //ADD begin
-  check_expr();
+  //check_expr();
   // char s[100];
   // bool st;
   // if(scanf("%s",s)==1){
