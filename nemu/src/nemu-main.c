@@ -25,6 +25,13 @@ word_t expr(char *e, bool *success);
 void check_expr();
 /*ADD end*/
 int main(int argc, char *argv[]) {
+  //check_expr();
+  char s[100];
+  bool st;
+  if(scanf("%s",s)==1){
+
+  }
+  expr(s,&st);
   /* Initialize the monitor. */
 #ifdef CONFIG_TARGET_AM
   am_init_monitor();
@@ -33,13 +40,8 @@ int main(int argc, char *argv[]) {
 #endif
 
   /* Start engine. */
-  //check_expr();
-  char s[100];
-  bool st;
-  if(scanf("%s",s)==1){
-
-  }
-  expr(s,&st);
+  
+  
   engine_start();
 
   return 0;
