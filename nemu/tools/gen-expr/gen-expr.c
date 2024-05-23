@@ -19,6 +19,7 @@
 #include <time.h>
 #include <assert.h>
 #include <string.h>
+//生成测试用例
 /*ADD begin*/
 static void gen_num();
 static void gen_rand_op();

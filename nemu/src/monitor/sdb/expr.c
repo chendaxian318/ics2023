@@ -49,19 +49,19 @@ static struct rule {
   {"^[0-9]*",TK_NUM},     //number
   {"\\*",TK_MUL},         //multiply
   {"/",TK_DIV},         //divide
-  {" ", TK_NOTYPE},    // spaces
+  {" +", TK_NOTYPE},    // spaces
   {"\\+", TK_PLUS},         // plus
   {"-",TK_SUB},            //subtraction
   {"==", TK_EQ},        // equal
-  {"\\(",TK_L_BRACKET},  
-  {")",TK_R_BRACKET},
+  {"\\(",TK_L_BRACKET},  //左括号
+  {")",TK_R_BRACKET},     
   
 };
 
 #define NR_REGEX ARRLEN(rules)
 
 static regex_t re[NR_REGEX] = {};
-
+//初始化
 /* Rules are used for many times.
  * Therefore we compile them only once before any usage.
  */
@@ -78,13 +78,15 @@ void init_regex() {
     }
   }
 }
-
+//token数据结构
 typedef struct token {
   int type;
   char str[32];
 } Token;
-
+//tokens是Token数组
 static Token tokens[32] __attribute__((used)) = {};
+
+//nr_token是Token数组的个数
 static int nr_token __attribute__((used))  = 0;
 
 static bool make_token(char *e) {
